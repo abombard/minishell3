@@ -1,0 +1,17 @@
+./srcs
+./includes
+./libs/libft
+./libs/list/srcs
+./libs/list
+./libs/ft_printf
+./libs/ft_printf/srcs
+./libs/ft_printf/includes
+./libs/ft_printf/libs/libft
+./libs/caps/srcs
+./libs/caps/includes
+./libs/caps
+./libs/caps/libs/libft
+./libs/caps/libs/ft_printf
+./libs/caps/libs/ft_printf/srcs
+./libs/caps/libs/ft_printf/includes
+./libs/caps/libs/ft_printf/libs/libft
