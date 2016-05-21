@@ -1,12 +1,15 @@
 #include "minishell.h"
+#include "libft.h"
 #include "types.h"
 #include "log.h"
 
 #include <stdlib.h>
-
+#include <caps.h>
 /*
 ** Display the command line
 */
+#define NL_SIZE		(sizeof("\n\r") - 1)
+#define NL					"\n\r"
 bool	minishell__display_command_line(const t_list_head *command_line)
 {
 	size_t	buffer_size_max;
@@ -27,6 +30,11 @@ bool	minishell__display_command_line(const t_list_head *command_line)
 		return (FALSE);
 	}
 	write(1, buffer, buffer_size);
+	if (buffer_size % caps__win(WIN_COLUMNS) == 0)
+	{
+		caps__print_cap(CAPS__DOWN, 0);
+		caps__print_cap(CAPS__CARRIAGE_RETURN, 0);
+	}
 	free(buffer);
 	return (TRUE);
 }

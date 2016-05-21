@@ -21,8 +21,8 @@ bool	key__send(t_internal_context *context)
 	{
 		if (!minishell__display_command_line(&context->command_line))
 			FATAL("minishell__display_command_line() failed %s\r", "");
-		caps__print_cap(CAPS__DOWN);
-		caps__print_cap(CAPS__CARRIAGE_RETURN);
+		caps__print_cap(CAPS__DOWN, 0);
+		caps__print_cap(CAPS__CARRIAGE_RETURN, 0);
 		if (context->command_line.size > PROMPT_SIZE)
 		{
 			/* -- command line to buffer */

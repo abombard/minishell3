@@ -6,7 +6,7 @@ static void caps__cursor_to_line_offset(int current_line, const int dest_line)
 	{
 		while (current_line > dest_line)
 		{
-			caps__print_cap(CAPS__UP);
+			caps__print_cap(CAPS__UP, 0);
 			current_line--;
 		}
 	}
@@ -14,7 +14,7 @@ static void caps__cursor_to_line_offset(int current_line, const int dest_line)
 	{
 		while (current_line < dest_line)
 		{
-			caps__print_cap(CAPS__DOWN);
+			caps__print_cap(CAPS__DOWN, 0);
 			current_line++;
 		}
 	}
@@ -26,7 +26,7 @@ static void	caps__cursor_to_col_offset(int current_col, const int dest_col)
 	{
 		while (current_col > dest_col)
 		{
-			caps__print_cap(CAPS__LEFT);
+			caps__print_cap(CAPS__LEFT, 0);
 			current_col--;
 		}
 	}
@@ -34,7 +34,7 @@ static void	caps__cursor_to_col_offset(int current_col, const int dest_col)
 	{
 		while (current_col < dest_col)
 		{
-			caps__print_cap(CAPS__RIGHT);
+			caps__print_cap(CAPS__RIGHT, 0);
 			current_col++;
 		}
 	}

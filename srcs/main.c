@@ -122,6 +122,12 @@ static bool	minishell__treat_input(const t_input_type input_type,
 	return (TRUE);
 }
 
+#define CURSOR_A_GET_XY_SIZE		(sizeof("\033") - 1)
+#define CURSOR_A_GET_XY						"\033"
+
+#define CURSOR_Q_GET_XY_SIZE		(sizeof("\033[6n") - 1)
+#define CURSOR_Q_GET_XY						"\033[6n"
+
 /*
 ** Read loop
 */
@@ -151,6 +157,7 @@ static bool minishell__read_input(const int fd)
 
 		//ft_printf("\n\rkeycode: %s\n\r", caps__keycode_dump(input_buffer_size, input_buffer));
 
+
 		caps__delete_line(context.command_line.offset);
 
 		minishell__treat_input(input_type,
@@ -170,8 +177,8 @@ static bool minishell__read_input(const int fd)
 */
 static bool minishell__termios_raw(const int fd)
 {
-	struct termios			termios_old;
 	struct termios			termios_new;
+	struct termios			termios_old;
 
 	if (!isatty(fd))
 		FATAL("We're not reading on a tty fd %d", fd);
@@ -192,25 +199,8 @@ static bool minishell__termios_raw(const int fd)
 	termios_new.c_cc[VMIN] = 1;
 	termios_new.c_cc[VTIME] = 0;
 
-	struct serial_struct serinfo;
-	if (ioctl(fd, TIOCGSERIAL, &serinfo) < 0)
-		FATAL("ioctl() TIOCGSERIAL failed %s", "");
-	serinfo.flags &= ~ASYNC_SPD_MASK;
-	serinfo.flags |= ASYNC_SPD_CUST;
-	serinfo.custom_divisor = (serinfo.baud_rate + (rate / 2)) / rate;
-	if (ioctl(fd, TIOCSSERIAL, &serinfo) < 0)
-		FATAL("ioctl() TIOCSERIAL failed %s", "");	
-	if (ioctl(fd, TIOCGSERIAL, &serinfo) < 0)
-		FATAL("ioctl() TIOCGSERIAL %s", "");	
-	if (serinfo.custom_divisor * rate != serinfo.baud_base)
-	{
-		FATAL("actual baudrate is %d / %d = %f",
-		      serinfo.baud_base, serinfo.custom_divisor,
-		      (float)serinfo.baud_base / serinfo.custom_divisor);
-	}
-
 	/* set terminal in raw mode */
-	if (tcsetattr(fd, TCSAFLUSH, &termios_new) != 0)
+	if (tcsetattr(fd, TCSANOW, &termios_new) != 0)
 		FATAL("tcsetattr() failed to initialize %s\r", "");
 
 	if (!minishell__read_input(fd))

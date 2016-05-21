@@ -113,18 +113,12 @@ void			list_head__command_line_destroy(t_list_head *head)
 }
 
 # include "caps.h"
-# define CAPS__NL_SIZE	(size_t)(sizeof("\n\r") - 1)
-# define CAPS__NL						"\n\r"
-
 bool		list_head__command_line_to_buffer(const t_list_head *head, const size_t buffer_size_max, size_t *buffer_size, char *buffer)
 {
 	size_t			buffer_offset;
 	t_list			*pos;
-	size_t			pos_offset;
 	t_list_node_cmd *node_cmd;
-	size_t			col_count = caps__win(WIN_COLUMNS);
 
-	pos_offset = 0;
 	buffer_offset = 0;
 	LIST_FOREACH(&head->list, pos)
 	{
@@ -136,12 +130,6 @@ bool		list_head__command_line_to_buffer(const t_list_head *head, const size_t bu
 		}
 		ft_memcpy(buffer + buffer_offset, node_cmd->character, node_cmd->character_size);
 		buffer_offset += node_cmd->character_size;
-		pos_offset += 1;
-		if (pos_offset % col_count == 0)
-		{
-			ft_memcpy(buffer + buffer_offset, CAPS__NL, CAPS__NL_SIZE);
-			buffer_offset += CAPS__NL_SIZE;
-		}
 	}
 	*buffer_size = buffer_offset;
 	return (TRUE);

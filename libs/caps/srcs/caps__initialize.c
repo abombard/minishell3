@@ -21,7 +21,7 @@
 static bool	internal_caps__initialize_caps(t_internal_context *caps)
 {
 	char	*capcodes[] = {
-		"nd", "le", "up", "do", "dc", "cd", "cr", "rc", "bc"
+		"nd", "le", "up", "do", "dc", "ce", "cd", "cr", "bc"
 	};
 	size_t	i;
 
@@ -69,6 +69,7 @@ static bool	internal_caps__initialize_keycodes(t_internal_context *caps)
 	return (TRUE);
 }
 
+#include <termios.h>
 static bool	internal_caps__tgetent(t_internal_context *caps)
 {
 	char		*termtype;
@@ -86,7 +87,19 @@ static bool	internal_caps__tgetent(t_internal_context *caps)
 	PC = temp ? *temp : 0;
 	BC = tgetstr("le", &caps->buffaddr);
 	UP = tgetstr("up", &caps->buffaddr);
-	ospeed = 20;
+
+	int baudrate= tgetnum("pb");
+	if (baudrate == -1)
+		LOG_WARNING("tgetnum() failed to get 'pb' %s", "");
+	LOG_DEBUG("lowest baud rate for padding %d", baudrate);
+	if (tgetflag("nx") == 0)
+		LOG_WARNING("tgetflag() nx not available %s", "");
+
+	struct termios ter;
+	if (tcgetattr(0, &ter) < 0)
+		FATAL("tcgetattr() failed %s", "");
+	ospeed = cfgetospeed(&ter);
+
 	return (TRUE);
 }
 
