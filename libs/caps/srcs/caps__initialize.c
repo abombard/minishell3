@@ -87,19 +87,6 @@ static bool	internal_caps__tgetent(t_internal_context *caps)
 	PC = temp ? *temp : 0;
 	BC = tgetstr("le", &caps->buffaddr);
 	UP = tgetstr("up", &caps->buffaddr);
-
-	int baudrate= tgetnum("pb");
-	if (baudrate == -1)
-		LOG_WARNING("tgetnum() failed to get 'pb' %s", "");
-	LOG_DEBUG("lowest baud rate for padding %d", baudrate);
-	if (tgetflag("nx") == 0)
-		LOG_WARNING("tgetflag() nx not available %s", "");
-
-	struct termios ter;
-	if (tcgetattr(0, &ter) < 0)
-		FATAL("tcgetattr() failed %s", "");
-	ospeed = cfgetospeed(&ter);
-
 	return (TRUE);
 }
 

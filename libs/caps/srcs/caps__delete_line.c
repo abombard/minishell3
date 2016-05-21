@@ -6,7 +6,7 @@
 /*   By: abombard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 15:51:24 by abombard          #+#    #+#             */
-/*   Updated: 2016/05/21 14:40:51 by abombard         ###   ########.fr       */
+/*   Updated: 2016/05/21 18:18:55 by abombard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ void	caps__delete_line(const size_t line_offset)
 		i = 0;
 		while (i < line_count)
 		{
-			caps__print_cap(CAPS__CLEAR_TO_END_OF_LINE, 1);
+			caps__print_cap(CAPS__CLEAR_TO_END_OF_LINE, caps__win(WIN_COLUMNS));
 			caps__print_cap(CAPS__UP, 0);
 			i++;
 		}
-		caps__print_cap(CAPS__CLEAR_TO_END_OF_LINE, 1);
+		caps__print_cap(CAPS__CLEAR_TO_END_OF_LINE, caps__win(WIN_COLUMNS));
 	}
 }

@@ -8,8 +8,6 @@
 /*
 ** Display the command line
 */
-#define NL_SIZE		(sizeof("\n\r") - 1)
-#define NL					"\n\r"
 bool	minishell__display_command_line(const t_list_head *command_line)
 {
 	size_t	buffer_size_max;

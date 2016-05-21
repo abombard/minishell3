@@ -175,6 +175,7 @@ static bool minishell__read_input(const int fd)
 /*
 ** Put the terminal in POSIX raw mode
 */
+#include <termcap.h>
 static bool minishell__termios_raw(const int fd)
 {
 	struct termios			termios_new;
@@ -198,6 +199,9 @@ static bool minishell__termios_raw(const int fd)
 	termios_new.c_cflag |= CS8;
 	termios_new.c_cc[VMIN] = 1;
 	termios_new.c_cc[VTIME] = 0;
+
+	ospeed = 10000 / cfgetospeed(&termios_old);
+	//cfsetospeed(&termios_new, ospeed);
 
 	/* set terminal in raw mode */
 	if (tcsetattr(fd, TCSANOW, &termios_new) != 0)
