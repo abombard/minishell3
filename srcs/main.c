@@ -200,7 +200,9 @@ static bool minishell__termios_raw(const int fd)
 	termios_new.c_cc[VMIN] = 1;
 	termios_new.c_cc[VTIME] = 0;
 
-	ospeed = 10000 / cfgetospeed(&termios_old);
+	long termios_ospeed = cfgetospeed(&termios_old);
+	ospeed = 10000 / termios_ospeed;
+	LOG_DEBUG("termios_ospeed %ld ospeed %d", termios_ospeed, ospeed);
 	//cfsetospeed(&termios_new, ospeed);
 
 	/* set terminal in raw mode */
@@ -238,8 +240,6 @@ static bool minishell__device_open(void)
 	fd = open(TTY_DEVICE, O_RDONLY);
 	if (fd == -1)
 		FATAL("open() failed on %s\r", TTY_DEVICE);
-
-	LOG_DEBUG("our program read and write on %s\r fd %d", TTY_DEVICE, fd);
 
 	if (!minishell__termios_raw(fd))
 	{
