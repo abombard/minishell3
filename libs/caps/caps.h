@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*																			  */
-/*														  :::	   ::::::::	  */
-/*	 caps.h												:+:		 :+:	:+:	  */
-/*													  +:+ +:+		  +:+	  */
-/*	 By: abombard <marvin@42.fr>					+#+	 +:+	   +#+		  */
-/*												  +#+#+#+#+#+	+#+			  */
-/*	 Created: 2016/04/01 15:17:09 by abombard		   #+#	  #+#			  */
-/*	 Updated: 2016/04/01 15:17:12 by abombard		  ###	########.fr		  */
-/*																			  */
-/* ************************************************************************** */
-
 #ifndef CAPS_H
 # define CAPS_H
 
@@ -22,7 +10,7 @@
 /*
 ** caps print
 */
-int					caps__print (const char *s, size_t line_count);
+int				caps__print (const char *s, size_t line_count);
 
 /*
 ** caps print cap
@@ -54,21 +42,31 @@ void	caps__delete_line(const size_t line_offset);
 void	caps__cursor_to_offset(const size_t to_offset, const size_t current_offset);
 
 /*
+** caps get cursor x y
+*/
+bool	caps__cursor_getxy(int *x, int *y);
+
+/*
+** caps put cursor
+*/
+bool	caps__cursor_setxy(int x, int y);
+
+/*
 ** caps win: return the count of column or line
 */
 # define WIN_COLUMNS					"co"
-# define WIN_LINE						"li"
+# define WIN_LINE					"li"
 
 size_t				caps__win (const char *cmd);
 
 /*
 ** caps tcapcodes
 */
-# define KEYPAD_UPPER_LEFT_KEY			"K1"
+# define KEYPAD_UPPER_LEFT_KEY				"K1"
 # define KEYPAD_CENTER_KEY				"K2"
-# define KEYPAD_UPPER_RIGHT_KEY			"K3"
-# define KEYPAD_BOTTOM_LEFT_KEY			"K4"
-# define KEYPAD_BOTTOM_RIGHT_KEY		"K5"
+# define KEYPAD_UPPER_RIGHT_KEY				"K3"
+# define KEYPAD_BOTTOM_LEFT_KEY				"K4"
+# define KEYPAD_BOTTOM_RIGHT_KEY			"K5"
 # define FUNCTION_KEY_0					"k0"
 # define FUNCTION_KEY_1					"k1"
 # define FUNCTION_KEY_2					"k2"
@@ -81,7 +79,7 @@ size_t				caps__win (const char *cmd);
 # define FUNCTION_KEY_9					"k9"
 # define FUNCTION_KEY_10				"k:"
 # define CURSOR_HOME_KEY				"kh"
-# define CURSOR_HOME_DOWN_KEY			"kH"
+# define CURSOR_HOME_DOWN_KEY				"kH"
 # define CURSOR_LEFT_KEY				"kl"
 # define CURSOR_RIGHT_KEY				"kr"
 # define CURSOR_UP_KEY					"ku"
@@ -89,37 +87,37 @@ size_t				caps__win (const char *cmd);
 # define PREVIOUS_PAGE_KEY				"kP"
 # define NEXT_PAGE_KEY					"kN"
 # define BACKSPACE_KEY					"kb"
-# define DELETE_UNDER_CURSOR_KEY		"kD"
+# define DELETE_UNDER_CURSOR_KEY			"kD"
 # define INSERT_MODE_KEY				"kI"
-# define EXIT_INSERT_MODE_KEY			"kM"
+# define EXIT_INSERT_MODE_KEY				"kM"
 # define KEYPAD_ON_KEY					"ks"
 # define KEYPAD_OFF_KEY					"ke"
 # define CLEAR_ALL_TABS_KEY				"ka"
 # define CLEAR_THIS_TAB_KEY				"kt"
 # define CLEAR_SCREEN_KEY				"kC"
-# define CLEAR_TO_END_OF_SCREEN_KEY		"kS"
-# define CLEAR_TO_END_OF_LINE_KEY		"kE"
+# define CLEAR_TO_END_OF_SCREEN_KEY			"kS"
+# define CLEAR_TO_END_OF_LINE_KEY			"kE"
 # define INSERT_LINE_KEY				"kA"
 # define DELETE_LINE_KEY				"kL"
 # define SET_TAB_HERE_KEY				"kT"
 # define BACK_TAB_KEY					"kB"
-# define SHIFTED_CURSOR_LEFT_KEY		"#4"
-# define SHIFTED_CURSOR_RIGHT_KEY		"%i"
-# define SCROLLING_FORWARD_KEY			"kF"
-# define SCROLLING_BACKWARD_KEY			"kR"
-# define BEGIN_KEY						"@1"
-# define END_KEY						"@7"
-# define MARK_KEY						"%2"
-# define SELECT_KEY						"*6"
-# define COPY_KEY						"@5"
-# define ENTER_KEY						"@8"
-# define EXIT_KEY						"@9"
+# define SHIFTED_CURSOR_LEFT_KEY			"#4"
+# define SHIFTED_CURSOR_RIGHT_KEY			"%i"
+# define SCROLLING_FORWARD_KEY				"kF"
+# define SCROLLING_BACKWARD_KEY				"kR"
+# define BEGIN_KEY					"@1"
+# define END_KEY					"@7"
+# define MARK_KEY					"%2"
+# define SELECT_KEY					"*6"
+# define COPY_KEY					"@5"
+# define ENTER_KEY					"@8"
+# define EXIT_KEY					"@9"
 # define SUSPEND_KEY					"&7"
-# define RESUME_KEY						"&5"
+# define RESUME_KEY					"&5"
 # define RESTART_KEY					"&4"
 # define REFRESH_KEY					"&2"
-# define REDO_KEY						"%0"
-# define CANCEL_KEY						"@2"
+# define REDO_KEY					"%0"
+# define CANCEL_KEY					"@2"
 
 /*
 ** caps init func: initialize function from tcapcode
@@ -157,10 +155,10 @@ bool				caps__init_func (const char *in_tcapcode, bool (*in_func)());
 # define CAPS__KEYCODE_META_X				STRING_TO_BUFFER("\x18")
 # define CAPS__KEYCODE_META_Y				STRING_TO_BUFFER("\x19")
 # define CAPS__KEYCODE_META_Z				STRING_TO_BUFFER("\x1a")
-# define CAPS__KEYCODE_META_CURSOR_LEFT		STRING_TO_BUFFER("\x1b\x5b\x31\x3b\x35\x44")
-# define CAPS__KEYCODE_META_CURSOR_RIGHT	STRING_TO_BUFFER("\x1b\x5b\x31\x3b\x35\x43")
-# define CAPS__KEYCODE_META_CURSOR_UP		STRING_TO_BUFFER("\x1b\x5b\x31\x3b\x35\x41")
-# define CAPS__KEYCODE_META_CURSOR_DOWN		STRING_TO_BUFFER("\x1b\x5b\x31\x3b\x35\x42")
+# define CAPS__KEYCODE_META_CURSOR_LEFT			STRING_TO_BUFFER("\x1b\x5b\x31\x3b\x35\x44")
+# define CAPS__KEYCODE_META_CURSOR_RIGHT		STRING_TO_BUFFER("\x1b\x5b\x31\x3b\x35\x43")
+# define CAPS__KEYCODE_META_CURSOR_UP			STRING_TO_BUFFER("\x1b\x5b\x31\x3b\x35\x41")
+# define CAPS__KEYCODE_META_CURSOR_DOWN			STRING_TO_BUFFER("\x1b\x5b\x31\x3b\x35\x42")
 # define CAPS__KEYCODE_BACKSPACE			STRING_TO_BUFFER("\x7f")
 # define CAPS__KEYCODE_ESCAPE				STRING_TO_BUFFER("\x1b")
 
@@ -177,7 +175,7 @@ char				*caps__keycode_dump (const size_t keycode_size, const char *keycode);
 /*
 ** caps keycode cmp
 */
-int					caps__keycode_cmp (const t_buffer keycode1, const t_buffer keycode2);
+int				caps__keycode_cmp (const t_buffer keycode1, const t_buffer keycode2);
 
 /*
 ** caps keycode find

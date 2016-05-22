@@ -102,9 +102,9 @@ static bool	minishell__identify_input(const unsigned int c, t_input_type *input_
 ** Treat
 */
 static bool	minishell__treat_input(const t_input_type input_type,
-								   const size_t input_buffer_size,
-								   const char *input_buffer,
-								   t_internal_context *context)
+					   const size_t input_buffer_size,
+					   const char *input_buffer,
+					   t_internal_context *context)
 {
 	if (input_type == MINISHELL__INPUT_TYPE_PRINT)
 	{
@@ -116,17 +116,17 @@ static bool	minishell__treat_input(const t_input_type input_type,
 	}
 	else
 	{
-		ft_printf("\n\rI dont really want to treat this\n\r");
+		ft_printf("\n\rAvoid Unicode\n\r");
 	}
 
 	return (TRUE);
 }
 
 #define CURSOR_A_GET_XY_SIZE		(sizeof("\033") - 1)
-#define CURSOR_A_GET_XY						"\033"
+#define CURSOR_A_GET_XY				"\033"
 
 #define CURSOR_Q_GET_XY_SIZE		(sizeof("\033[6n") - 1)
-#define CURSOR_Q_GET_XY						"\033[6n"
+#define CURSOR_Q_GET_XY				"\033[6n"
 
 /*
 ** Read loop
@@ -135,7 +135,7 @@ static bool minishell__read_input(const int fd)
 {
 	size_t			input_buffer_size;
 	char			input_buffer[INPUT_SIZE_MAX];
-	t_input_type	input_type;
+	t_input_type		input_type;
 	size_t			input_size_missing;
 
 	/* First PROMPT */
@@ -161,9 +161,9 @@ static bool minishell__read_input(const int fd)
 		caps__delete_line(context.command_line.offset);
 
 		minishell__treat_input(input_type,
-							   input_buffer_size,
-							   input_buffer,
-							   &context);
+				       input_buffer_size,
+		     		       input_buffer,
+				       &context);
 
 		ASSERT(minishell__display_command_line(&context.command_line));
 
@@ -192,7 +192,7 @@ static bool minishell__termios_raw(const int fd)
 
 	/* POSIX raw */
 	termios_new.c_iflag &= ~(IGNBRK | BRKINT | PARMRK | ISTRIP
-							 | INLCR | IGNCR | ICRNL | IXON);
+				 | INLCR | IGNCR | ICRNL | IXON);
 	termios_new.c_oflag &= ~OPOST;
 	termios_new.c_lflag &= ~(ECHO | ECHONL | ICANON | ISIG | IEXTEN);
 	termios_new.c_cflag &= ~(CSIZE | PARENB);

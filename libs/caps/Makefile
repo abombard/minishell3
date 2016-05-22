@@ -28,6 +28,8 @@ SRC=caps__context.c\
 	caps__print_cap.c\
 	caps__delete_line.c\
 	caps__cursor_to_offset.c\
+	caps__cursor_getxy.c\
+	caps__cursor_setxy.c
 
 OBJ=$(addprefix $(BUILD_DIR)/,$(SRC:.c=.o))
 

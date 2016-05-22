@@ -26,10 +26,9 @@ void	caps__delete_line(const size_t line_offset)
 		i = 0;
 		while (i < line_count)
 		{
-			caps__print_cap(CAPS__CLEAR_TO_END_OF_LINE, caps__win(WIN_COLUMNS));
 			caps__print_cap(CAPS__UP, 0);
 			i++;
 		}
-		caps__print_cap(CAPS__CLEAR_TO_END_OF_LINE, caps__win(WIN_COLUMNS));
+		caps__print_cap(CAPS__CLEAR_TO_END_OF_SCREEN, caps__win(WIN_COLUMNS));
 	}
 }
